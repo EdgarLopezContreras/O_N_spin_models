@@ -1,0 +1,8 @@
+.vscode/
+build/*
+logs/*
+!logs/.gitkeep
+parameters/*
+!parameters/jobs_list_generator.sh
+raw_data/*
+!raw_data/.gitkeep
