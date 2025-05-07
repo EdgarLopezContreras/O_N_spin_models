@@ -39,7 +39,13 @@ public:
 
     P periodic_index(int index) const {
         static bool is_power_of_2 = (L & (L - 1)) == 0; // in the first call of get_spin verify if L is power of 2 to improve % operation
-        return (is_power_of_2 ? (index & (L - 1)) : (index % L));
+        if (is_power_of_2)
+        {
+            return index & (L - 1);
+        }
+        else {
+            return (index == -1) ? L - 1 : (index == L ? 0 : index);
+        }
     }
 
     size_t get_flat_index(const vector<P>& indices) const {
@@ -90,12 +96,15 @@ public:
     }
 
     vector<P> get_spatial_coordinates(size_t flat_index) const {
+        static bool is_power_of_2 = (L & (L - 1)) == 0;
         vector<int> indices(total_dimensions - 1); 
         for (size_t i = total_dimensions; i-- > 1;) {
-            indices[i - 1] = (flat_index / strides[i]) % L;
+            size_t coord = flat_index / strides[i];
+            indices[i - 1] = is_power_of_2 ? (coord & (L - 1)) : (coord % L);
         }
         return indices;
     }
+    
 
     size_t total_spin_entries() const {
         return spins.size();

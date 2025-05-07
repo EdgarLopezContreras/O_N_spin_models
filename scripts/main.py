@@ -33,8 +33,8 @@ def beta_processing(args):
 
     energy_density = np.array([[inv_temp, *delete_d_jackknife(energy, 25, density, volume)]])
     magnetization_density = np.array([[inv_temp, *delete_d_jackknife(magnetization, 25, density, volume)]])
-    specific_ht = np.array([[inv_temp, *delete_d_jackknife(energy, 25, susceptibility, volume, inv_temp)]])
-    magnetic_sscpblt = np.array([[inv_temp, *delete_d_jackknife(magnetization, 25, susceptibility, volume, inv_temp**2)]])
+    specific_ht = np.array([[inv_temp, *delete_d_jackknife(energy, 25, susceptibility, volume, inv_temp**2)]])
+    magnetic_sscpblt = np.array([[inv_temp, *delete_d_jackknife(magnetization, 25, susceptibility, volume, inv_temp)]])
     binder = np.array([[inv_temp, *delete_d_jackknife(magnetization, 25, binder_cumulant, volume)]])
 
     return {

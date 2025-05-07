@@ -41,8 +41,8 @@ public:
             for (P j = 0; j < spin_lattice.get_spin_dimensions(); j++)
             {
                 coordinates[0] = j;
-                vector<int> neighbor_coordinates = coordinates;
                 for (P k = 0; k < spin_lattice.get_spatial_dimensions(); k++) {
+                    vector<int> neighbor_coordinates = coordinates;
                     neighbor_coordinates[1 + k] += 1;
                     // cout << "Par energía: ";
                     // spin_lattice.print_spin(spin_lattice.get_spatial_coordinates(i + j));
@@ -51,7 +51,7 @@ public:
                     // cout << "Energy contribution: " << -spin_lattice.get_spin_flat_index(i + j) * spin_lattice.get_spin(neighbor_coordinates) << ", ";
                     energy_configuration -= spin_lattice.get_spin_flat_index(i + j) * spin_lattice.get_spin(neighbor_coordinates);
                     // cout << "Energy total: " << energy_configuration << endl;
-                    neighbor_coordinates[1 + k] = coordinates[1 + k];
+                    // neighbor_coordinates[1 + k] = coordinates[1 + k];
                 }
             }
         }

@@ -53,12 +53,16 @@ public:
         for (P i = 0; i < dimensions[0]; i++)
         {
             indices[0] = i;
-            P k = 0;
-            for (P j = 0; j < pow(2, dimensions[1]); j++) {
-                vector<int> neighbor_indices = indices;
-                neighbor_indices[1 + k] += (j % 2 == 0) ? 1 : -1;
-                if (j % 2 == 1) k++;
-                delta_energy += (spin_lattice.get_spin(indices) - proposed_spin[i]) * spin_lattice.get_spin(neighbor_indices);
+            T current_spin = spin_lattice.get_spin(indices);
+            T new_spin = proposed_spin[i];
+            for (P j = 0; j < dimensions[1]; j++) {
+                for (int k : {-1, 1})
+                {
+                    vector<int> neighbor_indices = indices;
+                    neighbor_indices[1 + j] += k;
+                    T neighbor_spin = spin_lattice.get_spin(neighbor_indices);
+                    delta_energy += (current_spin - new_spin) * neighbor_spin;
+                }
             }
         }
         
@@ -91,12 +95,16 @@ public:
         for (P i = 0; i < dimensions[0]; i++)
         {
             indices[0] = i;
-            P k = 0;
-            for (P j = 0; j < pow(2, dimensions[1]); j++) {
-                vector<int> neighbor_indices = indices;
-                neighbor_indices[1 + k] += (j % 2 == 0) ? 1 : -1;
-                if (j % 2 == 1) k++;
-                delta_energy += (spin_lattice.get_spin(indices) - proposed_spin[i]) * spin_lattice.get_spin(neighbor_indices);
+            T current_spin = spin_lattice.get_spin(indices);
+            T new_spin = proposed_spin[i];
+            for (P j = 0; j < dimensions[1]; j++) {
+                for (int k : {-1, 1})
+                {
+                    vector<int> neighbor_indices = indices;
+                    neighbor_indices[1 + j] += k;
+                    T neighbor_spin = spin_lattice.get_spin(neighbor_indices);
+                    delta_energy += (current_spin - new_spin) * neighbor_spin;
+                }
             }
         }
         
